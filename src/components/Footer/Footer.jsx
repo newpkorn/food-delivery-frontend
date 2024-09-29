@@ -33,7 +33,7 @@ const Footer = () => {
       </div>
       <hr />
       <p className="footer-copyright">
-        &copy; {new Date().getFullYear()}. Made with ReactJs by newpk. All rights reserved.
+        &copy; {new Date().getFullYear()} by newpk. Proudly built with passion and ReactJS. All rights reserved.
       </p>
     </div>
   );
