@@ -3,6 +3,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    margin: auto;
+    background-color: white;
+    z-index: 50;
+    width: 80%;
 }
 
 .navbar .logo {
@@ -50,16 +56,43 @@
 
 .navbar-search-icon {
     position: relative;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+    cursor: pointer;;
 }
 
-.navbar-search-icon .dot {
+.navbar-search-icon:hover {
+    transform: scale(1.2);
+}
+
+
+.navbar-basket-icon {
+    position: relative;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.navbar-basket-icon:hover {
+    color: #1E8449 ;
+    transform: scale(1.2);
+}
+
+.navbar-basket-icon .dot {
     position: absolute;
-    min-width: 10px;
-    min-height: 10px;
+    min-width: 15px;
+    min-height: 15px;
     background-color: tomato;
-    border-radius: 5px;
+    border-radius: 50%;
     top: -8px;
     right: -8px;
+}
+
+.navbar-basket-icon .dot .amount {
+    color: white;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 1050px) {

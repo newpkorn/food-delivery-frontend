@@ -2,22 +2,24 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { assets } from '../../assets/assets';
 import './NavbarStyle.css';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { StoreContext } from '../../context/StoreContext';
 import { Link as ScrollLink } from 'react-scroll';
+import { imageIcon } from '../../constants/image-icon';
+import { FaCartArrowDown } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, getTotalItemsInCart } = useContext(StoreContext);
 
   const navbarMenu = ["home", "menu", "mobile-app", "contact us"];
   return (
     <div className='navbar'>
       <Link to="/">
-        <img src={assets.logo} alt="" className="logo" />
+        <img src={imageIcon.logo} alt="" className="logo" />
       </Link>
       <ul className='navbar-menu'>
         {navbarMenu.map((item, index) => (
@@ -38,12 +40,16 @@ const Navbar = ({ setShowLogin }) => {
 
 
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="" />
         <div className='navbar-search-icon'>
+          <CiSearch />
+        </div>
+        <div className='navbar-basket-icon'>
           <Link to="/cart">
-            <img src={assets.basket_icon} alt="" />
+            <FaCartArrowDown />
           </Link>
-          <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
+          <div className={getTotalCartAmount() === 0 ? "" : "dot"}>
+            <p className='amount'>{getTotalItemsInCart() === 0 ? "" : getTotalItemsInCart()}</p>
+          </div>
         </div>
         <button onClick={() => setShowLogin(true)}>sign in</button>
       </div >

@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
-import { assets } from '../../assets/assets';
 import './FoodItemStyle.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useContext } from 'react';
+import { imageIcon } from '../../constants/image-icon';
 
 const FoodItem = ({ id, name, price, description, image }) => {
 
@@ -18,21 +17,21 @@ const FoodItem = ({ id, name, price, description, image }) => {
           !cartItems[id]
             ? <img
               className='add'
-              src={assets.add_icon_white}
+              src={imageIcon.add_icon_white}
               alt=""
               onClick={() => addToCart(id)}
             />
             : <div className="food-item-counter">
               <img
                 className='minus'
-                src={assets.remove_icon_red}
+                src={imageIcon.remove_icon_red}
                 alt=""
                 onClick={() => removeFromCart(id)}
               />
               <p>{cartItems[id]}</p>
               <img
                 className='plus'
-                src={assets.add_icon_green}
+                src={imageIcon.add_icon_green}
                 alt=""
                 onClick={() => addToCart(id)} />
             </div>
@@ -41,10 +40,10 @@ const FoodItem = ({ id, name, price, description, image }) => {
       <div className="food-item-info">
         <div className="food-item-name-rating">
           <p>{name}</p>
-          <img src={assets.rating_starts} alt="" />
+          <img src={imageIcon.rating_starts} alt="" />
         </div>
         <p className="food-item-desc">{description}</p>
-        <p className="food-item-price">${price}</p>
+        <p className="food-item-price">฿{price}</p>
       </div>
     </div>
   );

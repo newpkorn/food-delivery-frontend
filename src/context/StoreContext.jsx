@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { createContext, useEffect, useState } from "react";
-import { food_list } from "../assets/assets";
+import { food_list } from "../constants/menu";
 
 export const StoreContext = createContext(null);
 
@@ -15,7 +15,6 @@ const StoreContextProvider = (props) => {
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     }
-    console.log(cartItems);
   };
 
   const removeFromCart = (itemId) => {
@@ -35,6 +34,16 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
+  const getTotalItemsInCart = () => {
+    let totalAmount = 0;
+    for (const item in cartItems) {
+      if (cartItems[item] > 0) {
+        totalAmount += cartItems[item];
+      }
+    }
+    return totalAmount;
+  };
+
 
   const contextValue = {
     food_list,
@@ -43,6 +52,7 @@ const StoreContextProvider = (props) => {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
+    getTotalItemsInCart,
   };
 
   return (

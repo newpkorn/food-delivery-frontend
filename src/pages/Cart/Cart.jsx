@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import './CartStyle.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
+import { LuDelete } from "react-icons/lu";
 
 const Cart = () => {
 
@@ -23,20 +24,20 @@ const Cart = () => {
         </div>
         <br />
         <hr />
-        {food_list.map((item, index) => {
+        {food_list.map((item) => {
           if (cartItems[item._id] > 0) {
             return (
-              <div>
-                <div key={index} className="cart-items-title cart-items-item">
+              <div key={item._id}>
+                <div className="cart-items-title cart-items-item">
                   <img src={item.image} alt={item.name} />
                   <p>{item.name}</p>
-                  <p>{item.price}</p>
+                  <p>฿{item.price}</p>
                   <p>{cartItems[item._id]}</p>
-                  <p>${item.price * cartItems[item._id]}</p>
+                  <p>฿{item.price * cartItems[item._id]}</p>
                   <p
-                    className='cross'
+                    className='delete'
                     onClick={() => removeFromCart(item._id)}>
-                    x
+                    <LuDelete />
                   </p>
                 </div>
                 <hr />
@@ -51,17 +52,17 @@ const Cart = () => {
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>฿{getTotalCartAmount()}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
+              <p>฿{getTotalCartAmount() === 0 ? 0 : 50}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}</b>
+              <b>฿{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}</b>
             </div>
           </div>
           <button

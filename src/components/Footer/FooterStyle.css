@@ -55,6 +55,7 @@
     gap: 35px;
   }
   .footer-copyright {
+    font-size: small;
     text-align: center;
   }
 }

@@ -1,4 +1,6 @@
-import { assets } from '../../assets/assets';
+import { CONTACT, COPYRIGHT, SOCIAL } from '../../constants/contact';
+import { imageIcon } from '../../constants/image-icon';
+
 import './FooterStyle.css';
 
 const Footer = () => {
@@ -6,12 +8,14 @@ const Footer = () => {
     <div className='footer' id='contact us'>
       <div className="footer-content">
         <div className="footer-content-left">
-          <img src={assets.logo} alt="" />
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore nobis aspernatur obcaecati pariatur labore eaque at consectetur laborum, dolor eveniet. A nobis quam illum ut quibusdam. Provident vero impedit recusandae deserunt, dolor omnis fugit!</p>
+          <img src={imageIcon.logo} alt="" />
+          <p>{CONTACT.detail}</p>
           <div className="footer-social-icon">
-            <img src={assets.facebook_icon} alt="" />
-            <img src={assets.twitter_icon} alt="" />
-            <img src={assets.linkedin_icon} alt="" />
+            {SOCIAL.map((social) => (
+              <a key={social.id} href={social.link} rel="noopener noreferrer">
+                <img src={social.icon} alt="" />
+              </a>
+            ))}
           </div>
         </div>
         <div className="footer-content-center">
@@ -26,14 +30,15 @@ const Footer = () => {
         <div className="footer-content-right">
           <h2>GET IN TOUCH</h2>
           <ul>
-            <li>+1-213-456-7890</li>
-            <li>contact@tomato.com</li>
+            <li>{CONTACT.phone}</li>
+            <li>{CONTACT.email}</li>
+            <li>{CONTACT.address}</li>
           </ul>
         </div>
       </div>
       <hr />
       <p className="footer-copyright">
-        &copy; {new Date().getFullYear()} by newpk. Proudly built with passion and ReactJS. All rights reserved.
+        &copy; {COPYRIGHT}
       </p>
     </div>
   );
