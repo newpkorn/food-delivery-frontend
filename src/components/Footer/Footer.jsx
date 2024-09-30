@@ -1,53 +1,47 @@
-import { useState, useEffect } from 'react';
-import './LoginPopupStyle.css';
+import { CONTACT, COPYRIGHT, SOCIAL } from '../../constants/contact';
 import { imageIcon } from '../../constants/image-icon';
 
-const LoginPopup = ({ setShowLogin }) => {
+import './FooterStyle.css';
 
-  const [currState, setCurrState] = useState("Login");
-
-  useEffect(() => {
-    // ปิดการเลื่อนเมื่อเปิด modal
-    document.body.style.overflow = 'hidden';
-
-    // คืนค่า overflow เมื่อ modal ถูกปิด
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
-
+const Footer = () => {
   return (
-    <div className='login-popup'>
-      <form className='login-popup-container'>
-        <div className="login-popup-title">
-          <h2>{currState}</h2>
-          <img onClick={() => setShowLogin(false)} src={imageIcon.cross_icon} alt="" />
+    <div className='footer' id='contact us'>
+      <div className="footer-content">
+        <div className="footer-content-left">
+          <img src={imageIcon.logo} alt="" />
+          <p>{CONTACT.detail}</p>
+          <div className="footer-social-icon">
+            {SOCIAL.map((social) => (
+              <a key={social.id} href={social.link} rel="noopener noreferrer">
+                <img src={social.icon} alt="" />
+              </a>
+            ))}
+          </div>
         </div>
-        <div className="login-popup-inputs">
-          {currState === "Login"
-            ? <>
-              <input type="email" placeholder='Your Email' required />
-              <input type="password" placeholder='Your Password' required />
-            </>
-            : <>
-              <input type="text" placeholder='Your Name' required />
-              <input type="email" placeholder='Your Email' required />
-              <input type="password" placeholder='Your Password' required />
-              <input type="password" placeholder='Confirm Your Password' required />
-            </>}
+        <div className="footer-content-center">
+          <h2>COMPANY</h2>
+          <ul>
+            <li>Home</li>
+            <li>About us</li>
+            <li>Delivery</li>
+            <li>Privacy policy</li>
+          </ul>
         </div>
-        <button>{currState === "Sign Up" ? "Create account" : "Login"}</button>
-        <div className="login-popup-condition">
-          <input type="checkbox" required />
-          <p>By continuing, I agree to the terms of use & privacy policy.</p>
+        <div className="footer-content-right">
+          <h2>GET IN TOUCH</h2>
+          <ul>
+            <li>{CONTACT.phone}</li>
+            <li>{CONTACT.email}</li>
+            <li>{CONTACT.address}</li>
+          </ul>
         </div>
-        {currState === "Login"
-          ? <p>Create a new account? <span onClick={() => setCurrState("Sign Up")}>Click here</span></p>
-          : <p>Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span></p>
-        }
-      </form>
+      </div>
+      <hr />
+      <p className="footer-copyright">
+        &copy; {COPYRIGHT}
+      </p>
     </div>
   );
 };
 
-export default LoginPopup;
+export default Footer;
