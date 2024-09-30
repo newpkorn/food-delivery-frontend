@@ -5,9 +5,8 @@
     align-items: center;
     position: fixed;
     top: 0;
-    margin: auto;
     background-color: white;
-    z-index: 50;
+    z-index: 1;
     width: 80%;
 }
 
@@ -20,7 +19,7 @@
     list-style: none;
     gap: 20px;
     color: #49557e;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .navbar-right {
@@ -32,23 +31,26 @@
 .navbar button {
     background-color: transparent;
     font-size: 16px;
-    color: #49557e;
+    font-weight: light;
+    color: tomato;
     border: 1px solid tomato;
     padding: 10px 30px;
-    border-radius: 15px;
+    border-radius: 20px;
     cursor: pointer;
     transition: 0.3s;
-
 }
 
 .navbar button:hover {
-    background-color: #fff4f2;
+    background-color: tomato;
+    color: white;
 }
 
-.navbar .active {
+.navbar-menu .active {
+    font-weight: bold;
+    color: red;
     padding-bottom: 2px;
-    border-bottom: 2px solid #49557e;
-}
+    border-bottom: 2px solid tomato;
+  }
 
 .navbar li {
     cursor: pointer;
@@ -69,15 +71,23 @@
 .navbar-basket-icon {
     position: relative;
     font-size: 24px;
+    pointer-events: none;
+    cursor: default;
+    color: gray;
+}
+
+.navbar-basket-icon-acive {
+    position: relative;
+    font-size: 24px;
     transition: transform 0.3s ease;
 }
 
-.navbar-basket-icon:hover {
+.navbar-basket-icon-acive:hover {
     color: #1E8449 ;
     transform: scale(1.2);
 }
 
-.navbar-basket-icon .dot {
+.navbar-basket-icon-acive .dot {
     position: absolute;
     min-width: 15px;
     min-height: 15px;
@@ -87,7 +97,7 @@
     right: -8px;
 }
 
-.navbar-basket-icon .dot .amount {
+.navbar-basket-icon-acive .dot .amount {
     color: white;
     font-size: 12px;
     display: flex;
@@ -137,5 +147,8 @@
 @media (max-width: 750px) {
     .navbar-menu {
         display: none;
+    }
+    .navbar {
+        padding-top: 20px;
     }
 }

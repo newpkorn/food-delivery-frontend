@@ -58,4 +58,9 @@
     font-size: small;
     text-align: center;
   }
+  .footer-content-center ul {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
 }

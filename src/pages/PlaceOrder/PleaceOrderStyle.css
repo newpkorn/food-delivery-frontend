@@ -40,8 +40,22 @@
   margin-bottom: 30px;
 }
 
-.place-order .cart-total button {
+.place-order .cart-total .button-payment {
   margin-top: 30px;
+  border: none;
+  color: white;
+  background-color: tomato;
+  width: max(15vw, 200px);
+  padding: 12px 0px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.place-order .cart-total .button-disabled {
+  margin-top: 30px;
+  pointer-events: none;
+  cursor: default;
+  color: gray;
 }
 
 

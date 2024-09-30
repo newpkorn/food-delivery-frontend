@@ -28,7 +28,7 @@
 .cart-items-item .delete {
   color: tomato;
   font-size: 15px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s;
   cursor: pointer;
 }
 
@@ -61,7 +61,7 @@
   margin: 10px 0px;
 }
 
-.cart-total button {
+.cart-total .button-checkout {
   border: none;
   color: white;
   background-color: tomato;
@@ -69,6 +69,16 @@
   padding: 12px 0px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.cart-total .button-disabled {
+  border: none;
+  width: max(15vw, 200px);
+  padding: 12px 0px;
+  border-radius: 4px;
+  pointer-events: none;
+  cursor: default;
+  color: gray;
 }
 
 .cart-promocode {
@@ -91,7 +101,9 @@
 .cart-promocode-input input {
   background: transparent;
   border: none;
-  padding-left: 10px;
+  padding: 12px 5px;
+  display: block;
+  outline: none;
 }
 
 .cart-promocode-input button {

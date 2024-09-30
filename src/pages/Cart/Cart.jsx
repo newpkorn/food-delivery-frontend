@@ -66,6 +66,7 @@ const Cart = () => {
             </div>
           </div>
           <button
+            className={getTotalCartAmount() > 0 ? 'button-checkout' : 'button-disabled'}
             onClick={() => navigate('/order')}>
             PROCEED TO CHECKOUT
           </button>

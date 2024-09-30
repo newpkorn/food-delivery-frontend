@@ -26,4 +26,4 @@ export const SOCIAL = [
   },
 ]
 
-export const COPYRIGHT = `฿{new Date().getFullYear()} newpk. Built with ♡ using ReactJS. All rights reserved.`;
+export const COPYRIGHT = `${new Date().getFullYear()} newpk. Built with ♡ using ReactJS. All rights reserved.`;

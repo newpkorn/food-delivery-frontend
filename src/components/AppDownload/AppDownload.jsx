@@ -4,7 +4,7 @@ import './AppDownloadStyle.css';
 
 const AppDownload = () => {
   return (
-    <div className='app-download' id='mobile-app'>
+    <div className='app-download' id='mobile app'>
       <p>For Better Experience Download <br /> Our App Now</p>
       <div className="app-download-platforms">
         <img src={imageIcon.play_store} alt="" />

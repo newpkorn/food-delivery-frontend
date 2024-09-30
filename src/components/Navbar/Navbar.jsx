@@ -15,7 +15,8 @@ const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const { getTotalCartAmount, getTotalItemsInCart } = useContext(StoreContext);
 
-  const navbarMenu = ["home", "menu", "mobile-app", "contact us"];
+  const navbarMenu = ["Home", "Menu", "Mobile App", "Contact Us"];
+
   return (
     <div className='navbar'>
       <Link to="/">
@@ -25,7 +26,7 @@ const Navbar = ({ setShowLogin }) => {
         {navbarMenu.map((item, index) => (
           <li key={index}>
             <ScrollLink
-              to={item}
+              to={item.toLocaleLowerCase()}
               smooth={true}
               duration={500}
               offset={-70}
@@ -43,7 +44,7 @@ const Navbar = ({ setShowLogin }) => {
         <div className='navbar-search-icon'>
           <CiSearch />
         </div>
-        <div className='navbar-basket-icon'>
+        <div className={getTotalCartAmount() === 0 ? "navbar-basket-icon" : "navbar-basket-icon-acive"}>
           <Link to="/cart">
             <FaCartArrowDown />
           </Link>
