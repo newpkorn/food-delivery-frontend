@@ -1,13 +1,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './LoginPopupStyle.css';
 import { imageIcon } from '../../constants/image-icon';
-
 
 const LoginPopup = ({ setShowLogin }) => {
 
   const [currState, setCurrState] = useState("Login");
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     <div className='login-popup'>
       <form className='login-popup-container'>
@@ -34,7 +42,7 @@ const LoginPopup = ({ setShowLogin }) => {
           <p>By continuing, I agree to the terms of use & privacy policy.</p>
         </div>
         {currState === "Login"
-          ? <p>Create a new account? <span onClick={() => setCurrState("Sing Up")}>Click here</span></p>
+          ? <p>Create a new account? <span onClick={() => setCurrState("Sign Up")}>Click here</span></p>
           : <p>Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span></p>
         }
       </form>

@@ -1,5 +1,7 @@
 import basket_icon from '../assets/basket_icon.png'
 import logo from '../assets/logo.png'
+import tomato_logo from '../assets/tomato_logo.png'
+import tomato_logo_1 from '../assets/tomato_logo_1.png'
 import header_img from '/header_img.png'
 import search_icon from '../assets/search_icon.png'
 
@@ -21,6 +23,8 @@ import parcel_icon from '../assets/parcel_icon.png'
 
 export const imageIcon = {
     logo,
+    tomato_logo,
+    tomato_logo_1,
     basket_icon,
     header_img,
     search_icon,

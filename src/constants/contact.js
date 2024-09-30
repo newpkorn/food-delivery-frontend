@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { imageIcon } from './image-icon';
 
 export const CONTACT = {
-  detail: 'ContaLorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore nobis aspernatur obcaecati pariatur labore eaque at consectetur laborum, dolor eveniet. A nobis quam illum ut quibusdam. Provident vero impedit recusandae deserunt, dolor omnis fugit!',
+  detail: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore nobis aspernatur obcaecati pariatur labore eaque at consectetur laborum, dolor eveniet. A nobis quam illum ut quibusdam. Provident vero impedit recusandae deserunt, dolor omnis fugit!',
   phone: '+66-2345-6789',
   email: 'contact@tomato.com',
   address: '123 Main Street, Bangkok, Thailand',

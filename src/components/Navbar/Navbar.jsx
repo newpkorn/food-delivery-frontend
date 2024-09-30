@@ -20,7 +20,7 @@ const Navbar = ({ setShowLogin }) => {
   return (
     <div className='navbar'>
       <Link to="/">
-        <img src={imageIcon.logo} alt="" className="logo" />
+        <img src={imageIcon.tomato_logo_1} alt="" className="logo" />
       </Link>
       <ul className='navbar-menu'>
         {navbarMenu.map((item, index) => (
