@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import './PleaceOrderStyle.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
+import { DELIVERY_FEE } from '../../constants/delivery-fee';
 
 const PlaceOrder = () => {
 
@@ -10,7 +11,7 @@ const PlaceOrder = () => {
   const navigate = useNavigate();
 
   return (
-    <form className='place-order' action='#'>
+    <form className='place-order'>
       <div className="place-order-left">
         <p className="title">
           Delivery Information
@@ -42,16 +43,15 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>฿{getTotalCartAmount() === 0 ? 0 : 50}</p>
+              <p>฿{getTotalCartAmount() === 0 ? 0 : DELIVERY_FEE.fifty_bath}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>฿{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 50}</b>
+              <b>฿{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + DELIVERY_FEE.fifty_bath}</b>
             </div>
           </div>
           <button
-            type='submit'
             className={getTotalCartAmount() > 0 ? "button-payment" : "button-disabled"}
             onClick={() => navigate('/payment')}>
             PROCEED TO PAYMENT

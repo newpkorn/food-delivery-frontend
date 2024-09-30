@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import { useState } from "react";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
 import Payment from "./pages/Payment/Payment";
+import BackToTop from "./components/ButtonVariants/BackToTop";
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
+      <BackToTop />
     </>
   );
 };

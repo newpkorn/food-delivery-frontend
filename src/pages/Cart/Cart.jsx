@@ -5,6 +5,7 @@ import './CartStyle.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
 import { LuDelete } from "react-icons/lu";
+import { DELIVERY_FEE } from '../../constants/delivery-fee';
 
 const Cart = () => {
 
@@ -57,12 +58,12 @@ const Cart = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>฿{getTotalCartAmount() === 0 ? 0 : 50}</p>
+              <p>฿{getTotalCartAmount() === 0 ? 0 : DELIVERY_FEE.fifty_bath}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>฿{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}</b>
+              <b>฿{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + DELIVERY_FEE.fifty_bath}</b>
             </div>
           </div>
           <button
