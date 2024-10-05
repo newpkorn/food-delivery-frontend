@@ -74,3 +74,27 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+.alert-container {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.alert-container.alert-success {
+  background-color: #d1fae5;
+  color: #047857;
+}
+
+.alert-container.alert-error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.icon {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+}

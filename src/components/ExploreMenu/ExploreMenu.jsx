@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { menu_list } from '../../constants/menu';
+import { menu_list } from '../../constants/menu.js';
 import './ExploreMenuStyle.css';
 
 const ExploreMenu = ({ category, setCategory }) => {

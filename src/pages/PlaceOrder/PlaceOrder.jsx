@@ -1,37 +1,168 @@
-import { useContext } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import { useContext, useEffect, useState } from 'react';
 import './PleaceOrderStyle.css';
 import { StoreContext } from '../../context/StoreContext';
-import { useNavigate } from 'react-router-dom';
 import { DELIVERY_FEE } from '../../constants/delivery-fee';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const PlaceOrder = () => {
 
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, token, food_list, cartItems, url } = useContext(StoreContext);
+
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: '',
+    phone: '',
+  });
+
+  const onChangeHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData({ ...data, [name]: value });
+  };
+
+  const placeOrder = async (e) => {
+    e.preventDefault();
+    let orderItems = [];
+    food_list.map((item) => {
+      if (cartItems[item._id] > 0) {
+        let itemInfo = item;
+        itemInfo['quantity'] = cartItems[item._id];
+        orderItems.push(itemInfo);
+      }
+    });
+
+    let orderData = {
+      address: data,
+      items: orderItems,
+      amount: Number(getTotalCartAmount() + DELIVERY_FEE.fifty_bath),
+    };
+
+    let response = await axios.post(url + '/api/order/place', orderData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.data.success) {
+      const { session_url } = response.data;
+      window.location.replace(session_url);
+    }
+    else {
+      alert("error");
+    }
+  };
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!token) {
+      alert('Please log in to continue with the payment.');
+      navigate('/cart');
+    }
+    else if (getTotalCartAmount() === 0) {
+      navigate('/cart');
+    }
+  }, [token]);
+
   return (
-    <form className='place-order'>
+    <form onSubmit={placeOrder} className='place-order'>
       <div className="place-order-left">
         <p className="title">
           Delivery Information
         </p>
         <div className="multi-fields">
-          <input type="text" placeholder="First Name" required />
-          <input type="text" placeholder="Last Name" required />
+          <input
+            name='firstName'
+            type="text"
+            placeholder="First Name"
+            required
+            onChange={onChangeHandler}
+            value={data.firstName}
+          />
+
+          <input
+            name='lastName'
+            type="text"
+            placeholder="Last Name"
+            required
+            onChange={onChangeHandler}
+            value={data.lastName}
+          />
         </div>
-        <input type="email" placeholder="Email Address" required />
-        <input type="text" placeholder="Stress" required />
+        <input
+          name='email'
+          type="email"
+          placeholder="Email Address"
+          required
+          onChange={onChangeHandler}
+          value={data.email}
+        />
+
+        <input
+          name='street'
+          type="text"
+          placeholder="Stress"
+          required
+          onChange={onChangeHandler}
+          value={data.street}
+        />
         <div className="multi-fields">
-          <input type="text" placeholder="City" required />
-          <input type="text" placeholder="State" required />
+          <input
+            name='city'
+            type="text"
+            placeholder="City"
+            required
+            onChange={onChangeHandler}
+            value={data.city}
+          />
+
+          <input
+            name='state'
+            type="text"
+            placeholder="State"
+            required
+            onChange={onChangeHandler}
+            value={data.state}
+          />
         </div>
+
         <div className="multi-fields">
-          <input type="text" placeholder="Zip code" required />
-          <input type="text" placeholder="Country" required />
+          <input
+            name='zipCode'
+            type="text"
+            placeholder="Zip code"
+            required
+            onChange={onChangeHandler}
+            value={data.zipCode}
+          />
+          <input
+            name='country'
+            type="text"
+            placeholder="Country"
+            required
+            onChange={onChangeHandler}
+            value={data.country}
+          />
         </div>
-        <input type="text" placeholder="Phone Number" required />
+
+        <input
+          name='phone'
+          type="text"
+          placeholder="Phone Number"
+          required
+          onChange={onChangeHandler}
+          value={data.phone}
+        />
       </div>
+
       <div className="place-order-right">
         <div className="cart-total">
           <h2>Cart Totals</h2>
@@ -52,8 +183,9 @@ const PlaceOrder = () => {
             </div>
           </div>
           <button
+            type='submit'
             className={getTotalCartAmount() > 0 ? "button-payment" : "button-disabled"}
-            onClick={() => navigate('/payment')}>
+          >
             PROCEED TO PAYMENT
           </button>
         </div>
