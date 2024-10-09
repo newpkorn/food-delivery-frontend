@@ -11,6 +11,8 @@ import { imageIcon } from '../../constants/image-icon';
 import { FaCartArrowDown } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import ReactLoading from 'react-loading';
+import { FaUser } from "react-icons/fa";
+import UserGreeting from '../UserGreeting/UserGreeting';
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
@@ -24,8 +26,17 @@ const Navbar = ({ setShowLogin }) => {
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
-    navigate("/");
+    navigate('/');
+    window.location.reload();
   };
+
+  useEffect(() => {
+    if (token && userObj && userObj.data && userObj.data.name) {
+      console.log('user name ', userObj.data.name);
+    } else {
+      console.log('No user login');
+    }
+  }, [userObj]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -57,14 +68,6 @@ const Navbar = ({ setShowLogin }) => {
         ))}
       </ul>
       {/* Right side of the navbar */}
-      {!token
-        ? null
-        : userObj && userObj.data && userObj.data.name
-          ? <div className="navbar-user-info">
-            <p>Hi, {userObj.data.name}</p>
-          </div>
-          : null
-      }
       <div className="navbar-right">
         <div className='navbar-search-icon'>
           <CiSearch />
@@ -79,14 +82,16 @@ const Navbar = ({ setShowLogin }) => {
         </div>
         {loading ? (
           <div className="loading-container">
-            <ReactLoading type="spin" color="#000" height={'20%'} width={'20%'} />
+            <ReactLoading type="spin" color="tomato" height={'20%'} width={'20%'} />
           </div>
         ) : (
           !token ? (
             <button onClick={() => setShowLogin(true)}>Sign In</button>
           ) : (
             <div className="navbar-Profile">
-              <img src={imageIcon.profile_icon} alt="" />
+              <div className="user-icon">
+                <UserGreeting user={userObj?.data?.name || "Guest"} />
+              </div>
               <ul className='nav-profile-dropdown'>
                 <li onClick={() => navigate("/myorders")}>
                   <img src={imageIcon.bag_icon} alt="" />

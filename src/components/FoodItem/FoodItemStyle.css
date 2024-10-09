@@ -1,19 +1,25 @@
 .food-item {
     width: 100%;
     margin: auto;
-    border-radius: 50px;
+    border-radius: 15px; /* เปลี่ยนให้เข้ากับดีไซน์ */
     box-shadow: 0px 0px 10px #00000015;
     transition: 0.3s;
     animation: fadeIn 1s;
+    display: flex; /* ใช้ flex เพื่อจัดระเบียบ */
+    flex-direction: column; /* ทำให้การ์ดเป็นแนวตั้ง */
+    height: 400px; /* กำหนดความสูงให้กับการ์ด */
 }
 
 .food-item-image {
-    width: 100%;
+    width: 100%; /* ใช้ 100% ของ container */
+    height: 200px; /* กำหนดความสูงที่ต้องการ */
     border-radius: 15px 15px 0px 0px;
+    object-fit: cover; /* ควบคุมอัตราส่วนของรูปภาพ */
 }
 
 .food-item-info {
     padding: 20px;
+    flex-grow: 1; /* ทำให้ข้อมูลในการ์ดขยายให้เต็มพื้นที่ */
 }
 
 .food-item-name-rating {

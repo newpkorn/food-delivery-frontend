@@ -46,18 +46,36 @@ const PlaceOrder = () => {
       amount: Number(getTotalCartAmount() + DELIVERY_FEE.fifty_bath),
     };
 
-    let response = await axios.post(url + '/api/order/place', orderData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (response.data.success) {
-      const { session_url } = response.data;
-      window.location.replace(session_url);
+    // let response = await axios.post(url + '/api/order/place', orderData, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // });
+    // if (response.data.success) {
+    //   const { session_url } = response.data;
+    //   window.location.replace(session_url);
+    // }
+    // else {
+    //   alert("error");
+    // }
+    console.log('orderData', orderData);
+    try {
+      let response = await axios.post(url + '/api/order/place', orderData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.data.success) {
+        const { session_url } = response.data;
+        window.location.replace(session_url);
+      } else {
+        alert("Order placement failed: " + response.data.message);
+      }
+    } catch (error) {
+      console.error("Order placement error:", error);
+      alert("Order placement failed: " + error.message);
     }
-    else {
-      alert("error");
-    }
+
   };
 
   const navigate = useNavigate();

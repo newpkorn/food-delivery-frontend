@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // /* eslint-disable no-unused-vars */
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './VerifyStyle.css';
@@ -23,8 +24,10 @@ const Verify = () => {
       if (response.data.success) {
         navigate('/myorders');
       } else {
+        alert('Payment verification failed. Please try again.');
         navigate('/');
       }
+
       setHasVerified(true);
     } catch (error) {
       console.log(error);
@@ -36,13 +39,18 @@ const Verify = () => {
     if (!hasVerified) {
       verifyPayment();
     }
-  }, [hasVerified]);
+  }, []);
 
   return (
-    <div>
-      <div className="verify">
-        <div className="spinner"></div>
-      </div>
+    <div className="verify">
+      {!hasVerified ? (
+        <div>
+          <div className="spinner"></div>
+          <p>Verifying your payment...</p>
+        </div>
+      ) : (
+        <p>Payment verified!</p>
+      )}
     </div>
   );
 };

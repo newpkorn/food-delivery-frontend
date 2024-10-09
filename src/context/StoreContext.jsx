@@ -15,7 +15,6 @@ const StoreContextProvider = (props) => {
   const [food_list, setFoodList] = useState([]);
   const [userObj, setUserObj] = useState({});
 
-
   const getMe = async (token) => {
     try {
       const response = await axios.get(url + "/api/user/me", {
@@ -28,7 +27,6 @@ const StoreContextProvider = (props) => {
       console.error("Error fetching user data:", error);
     }
   };
-
 
   const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
@@ -85,7 +83,6 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-
   const getTotalItemsInCart = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
@@ -112,7 +109,7 @@ const StoreContextProvider = (props) => {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log('API response', response.data);
+
       if (response.data.success) {
         setCartItems(response.data.cartData);
       } else {
@@ -123,7 +120,6 @@ const StoreContextProvider = (props) => {
       console.error('Error fetching cart items:', error.response ? error.response.data : error.message);
     }
   };
-
 
   useEffect(() => {
     async function fetchData() {
@@ -154,6 +150,10 @@ const StoreContextProvider = (props) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log('Backed host: ', import.meta.env.VITE_API_URL);
+  }, [cartItems]);
+
 
   const contextValue = {
     food_list,
@@ -166,6 +166,7 @@ const StoreContextProvider = (props) => {
     url,
     token,
     setToken,
+    getMe,
     userObj,
   };
 

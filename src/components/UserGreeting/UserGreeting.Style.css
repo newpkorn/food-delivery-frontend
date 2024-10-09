@@ -1,0 +1,52 @@
+.user-login {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  color: tomato;
+  padding: 20px 0px 20px 0px;
+}
+
+.user-icon {
+  font-size: 40px;
+  margin-right: 5px;
+}
+
+.user-text {
+  position: absolute;
+  top: 0;
+  right: -35px;
+  width: 100px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .user-login {
+    position: relative;
+    flex-direction: column-reverse;
+    gap: 5px;
+  }
+  .user-icon {
+    font-size: 20px;
+    justify-content: space-between;
+  }
+  .user-text {
+    position: absolute;
+    top: 0;
+    right: -35px;
+    width: 100px;
+  }
+}
+
+@media (max-width: 750px) {
+  .user-login {
+    align-items: center;
+  }
+  .user-icon {
+    font-size: 20px;
+  }
+  .user-text {
+    display: none;
+  }
+}

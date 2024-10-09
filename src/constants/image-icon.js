@@ -21,6 +21,9 @@ import bag_icon from '../assets/bag_icon.png'
 import logout_icon from '../assets/logout_icon.png'
 import parcel_icon from '../assets/parcel_icon.png'
 import coming_soon from '../assets/coming_soon.png'
+import food_process from '../assets/food-processing.png'
+import out_for_delivery from '../assets/out_for_delivery.png'
+import delivered from '../assets/delivered.png'
 
 export const imageIcon = {
     logo,
@@ -44,6 +47,9 @@ export const imageIcon = {
     logout_icon,
     bag_icon,
     parcel_icon,
-    coming_soon
+    coming_soon,
+    food_process,
+    out_for_delivery,
+    delivered
 }
 

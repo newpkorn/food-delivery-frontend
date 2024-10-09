@@ -7,9 +7,10 @@ import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { MdError } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPopup = ({ setShowLogin }) => {
-  const { url, setToken } = useContext(StoreContext);
+  const { url, setToken, getMe } = useContext(StoreContext);
   const [currState, setCurrState] = useState("Login");
   const [alert, setAlert] = useState({ type: '', message: '' });
 
@@ -19,6 +20,8 @@ const LoginPopup = ({ setShowLogin }) => {
     password: "",
     confirmPassword: ""
   });
+
+  const navigate = useNavigate();
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -41,7 +44,6 @@ const LoginPopup = ({ setShowLogin }) => {
       };
       newUrl += '/api/user/register';
     }
-    console.log("API URL:", newUrl);
 
     try {
       const response = await axios.post(newUrl, dataToSend);
@@ -53,11 +55,12 @@ const LoginPopup = ({ setShowLogin }) => {
 
       if (response.data.success) {
         setToken(response.data.token);
-        setShowLogin(false);
-
         localStorage.setItem('token', response.data.token);
 
-        window.location.reload('/');
+        getMe(response.data.token);
+
+        setShowLogin(false);
+        navigate('/');
       } else {
         console.log("FAIL!!", response.data.message);
       }
