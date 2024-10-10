@@ -12,13 +12,13 @@
   margin-right: 5px;
 }
 
-.user-text {
+.user-name {
   position: absolute;
   top: 0;
   right: -35px;
   width: 100px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 @media (max-width: 900px) {
@@ -31,7 +31,7 @@
     font-size: 20px;
     justify-content: space-between;
   }
-  .user-text {
+  .user-name {
     position: absolute;
     top: 0;
     right: -35px;
@@ -46,7 +46,10 @@
   .user-icon {
     font-size: 20px;
   }
-  .user-text {
-    display: none;
+  .user-name {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 100px;
   }
 }

@@ -60,12 +60,11 @@ const MyOrders = () => {
         ) : (
           data.length > 0 ? (
             data.map((order) => {
-              //  define orderStatuses for checking the current status
               const currentStatus = orderStatuses[order._id] || order.status;
 
               return (
-                <div key={order._id} className="my-orders-order">
-                  <p>
+                <div key={order._id} className="my-orders-order" data-status={currentStatus}>
+                  <p className='img-status-container'>
                     <img className='img-status' src={
                       currentStatus === "Delivered" ? imageIcon.delivered
                         : currentStatus === "Out for delivery" ? imageIcon.out_for_delivery
@@ -79,14 +78,17 @@ const MyOrders = () => {
                         : item.name + " x " + item.quantity + ", "
                     ))}
                   </p>
+                  <hr />
 
                   <p>
                     ฿{order.amount}.00
                   </p>
+                  <hr />
 
                   <p>
                     Items: {order.items.length}
                   </p>
+                  <hr />
 
                   <p>
                     <span className={
@@ -99,7 +101,12 @@ const MyOrders = () => {
                     <b>{currentStatus}</b>
                   </p>
 
-                  <button onClick={() => trackingOrder(order._id)}>Track Order</button>
+                  <button
+                    onClick={() => trackingOrder(order._id)}
+                    className={currentStatus === "Delivered" ? 'btn-disabled' : ''}
+                  >
+                    Tracking
+                  </button>
                 </div>
               );
             })
@@ -110,6 +117,7 @@ const MyOrders = () => {
       </div>
     </div>
   );
+
 };
 
 export default MyOrders;

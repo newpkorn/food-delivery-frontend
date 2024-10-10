@@ -11,6 +11,14 @@
 
 body {
   min-height: 100vh;
+  overflow: auto; /* เปิดการเลื่อนทั้งสองแนว */
+  scrollbar-width: none; /* ซ่อน scrollbar สำหรับ Firefox */
+  -ms-overflow-style: none; /* ซ่อน scrollbar สำหรับ Internet Explorer และ Edge */
+}
+
+body::-webkit-scrollbar {
+  width: 0px; /* ซ่อน scrollbar สำหรับ Chrome, Safari และ Opera */
+  height: 0px; /* ซ่อน scrollbar สำหรับแนวนอน */
 }
 
 a {

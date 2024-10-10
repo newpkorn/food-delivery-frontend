@@ -7,7 +7,7 @@ const UserGreeting = ({ user }) => {
   return (
     <div className="user-login">
       <FaUserCircle className='user-icon' size={40} />
-      <span className='user-text'>Hi, {user}!</span>
+      <span className='user-name'>Hi, {user}!</span>
     </div>
   );
 };

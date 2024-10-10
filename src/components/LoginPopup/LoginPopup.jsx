@@ -10,7 +10,7 @@ import { MdError } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPopup = ({ setShowLogin }) => {
-  const { url, setToken, getMe } = useContext(StoreContext);
+  const { url, setToken, getMe, fetchCartItems } = useContext(StoreContext);
   const [currState, setCurrState] = useState("Login");
   const [alert, setAlert] = useState({ type: '', message: '' });
 
@@ -58,6 +58,7 @@ const LoginPopup = ({ setShowLogin }) => {
         localStorage.setItem('token', response.data.token);
 
         getMe(response.data.token);
+        fetchCartItems(response.data.token);
 
         setShowLogin(false);
         navigate('/');
