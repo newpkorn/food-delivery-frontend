@@ -1,0 +1,100 @@
+.user-profile-container {
+  width: 90%;
+  max-width: 500px;
+  margin: 150px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  text-align: center;
+}
+
+h1 {
+  color: #4a4a4a;
+}
+
+.profile-picture {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.upload-label {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none; /* ซ่อน input file */
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgb(232, 162, 150);
+  overflow: hidden;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.placeholder-icon {
+  font-size: 50px;
+  color: tomato;
+}
+
+.upload-icon {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;;
+  color: lightslategray;
+}
+
+.profile-info {
+  margin: 20px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.update-button {
+  background-color: tomato;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.update-button:hover {
+  background-color:  white;
+  color: tomato;
+  border: 1px solid tomato;
+}

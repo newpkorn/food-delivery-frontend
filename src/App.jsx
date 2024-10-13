@@ -11,6 +11,8 @@ import LoginPopup from "./components/LoginPopup/LoginPopup";
 import BackToTop from "./components/ButtonVariants/BackToTop";
 import Verify from "./pages/vertify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 
@@ -27,6 +29,7 @@ const App = () => {
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/myorders" element={<MyOrders />} />
+          <Route path="/user-profile" element={<UserProfile />} />
         </Routes>
       </div>
       <Footer />

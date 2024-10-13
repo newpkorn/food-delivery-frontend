@@ -60,13 +60,16 @@
 
 .login-popup-condition {
   display: flex;
-  align-items: safe;
+  align-items: center;
   gap: 8px;
   margin-top: 15px;
 }
 
-.login-popup-condition input {
-  margin-top: 2px;
+.login-popup-condition input[type="checkbox"] {
+  width: 16px; 
+  height: 16px; 
+  margin-top: 0; 
+  cursor: pointer;
 }
 
 .login-popup p span {

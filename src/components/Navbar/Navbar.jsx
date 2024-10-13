@@ -11,13 +11,13 @@ import { imageIcon } from '../../constants/image-icon';
 import { FaCartArrowDown } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import ReactLoading from 'react-loading';
-import { FaUser } from "react-icons/fa";
 import UserGreeting from '../UserGreeting/UserGreeting';
+import { LuUser } from "react-icons/lu";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const [loading, setLoading] = useState(true);
-  const { getTotalCartAmount, getTotalItemsInCart, token, setToken, userObj } = useContext(StoreContext);
+  const { url, getTotalCartAmount, getTotalItemsInCart, token, setToken, userObj } = useContext(StoreContext);
 
   const navbarMenu = ["Home", "Menu", "Mobile App", "Contact Us"];
 
@@ -93,6 +93,11 @@ const Navbar = ({ setShowLogin }) => {
                 <UserGreeting user={userObj?.data?.name || "Guest"} />
               </div>
               <ul className='nav-profile-dropdown'>
+                <li onClick={() => navigate("/user-profile")}>
+                  <LuUser className='profile' />
+                  <p>Profile</p>
+                </li>
+                <hr />
                 <li onClick={() => navigate("/myorders")}>
                   <img src={imageIcon.bag_icon} alt="" />
                   <p>Orders</p>

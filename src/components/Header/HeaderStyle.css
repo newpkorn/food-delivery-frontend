@@ -1,6 +1,6 @@
 .header {
     height: 34vw;
-    margin: 120px auto 30px;
+    margin: 160px auto 30px;
     background-image: url('/header_img.png');
     background-repeat: no-repeat;
     background-size: contain;
@@ -49,6 +49,9 @@
 }
 
 @media (max-width: 750px) {
+    .header {
+        margin-top: 130px;
+    }
     .header-contents {
         max-width: 80%;
     }
