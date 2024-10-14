@@ -12,7 +12,7 @@ const UserGreeting = ({ user }) => {
     <div className="user-login">
       {userObj?.data?.image ? <img src={`${url}/images/users/` + userObj.data._id + '/' + userObj.data.image} className='user-profile' /> :
         <FaUserCircle className='user-icon' size={40} />}
-      <span className='user-name'>Hi, {user}!</span>
+      <span className='user-name'>Hi, {user} !</span>
     </div>
   );
 };

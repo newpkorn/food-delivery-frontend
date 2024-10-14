@@ -25,7 +25,7 @@ const LoginPopup = ({ setShowLogin }) => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    console.log("Login form submitted"); // Log การส่งฟอร์ม
+    console.log("Login form submitted");
     let newUrl = url;
 
     let dataToSend;
