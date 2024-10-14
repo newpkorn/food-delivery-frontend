@@ -3,7 +3,7 @@
 import './UserGreeting.Style.css';
 import { useContext } from 'react';
 import { StoreContext } from '../../context/StoreContext';
-import { FaUserCircle } from 'react-icons/fa'; // ไอคอนรูปคน
+import { FaUserCircle } from 'react-icons/fa';
 
 const UserGreeting = ({ user }) => {
 

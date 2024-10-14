@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from 'react';
 import './PleaceOrderStyle.css';
 import { StoreContext } from '../../context/StoreContext';
@@ -46,19 +45,6 @@ const PlaceOrder = () => {
       amount: Number(getTotalCartAmount() + DELIVERY_FEE.fifty_bath),
     };
 
-    // let response = await axios.post(url + '/api/order/place', orderData, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // });
-    // if (response.data.success) {
-    //   const { session_url } = response.data;
-    //   window.location.replace(session_url);
-    // }
-    // else {
-    //   alert("error");
-    // }
-    console.log('orderData', orderData);
     try {
       let response = await axios.post(url + '/api/order/place', orderData, {
         headers: {

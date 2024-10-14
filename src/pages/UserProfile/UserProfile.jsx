@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import './UserProfileStyle.css';
 import { useState, useContext, useEffect } from 'react';
 import { StoreContext } from '../../context/StoreContext';
@@ -45,31 +44,6 @@ const UserProfile = () => {
       formData.append('newPassword', data.newPassword);
       formData.append('confirmPassword', data.confirmPassword);
     }
-
-    //   try {
-    //     const response = await axios.patch(`${url}/api/user/update/${userObj.data._id}`, formData, {
-    //       headers: {
-    //         'Content-Type': 'multipart/form-data',
-    //         Authorization: `Bearer ${token}`,
-    //       }
-    //     });
-
-    //     if (response.data.success) {
-    //       toast.success(response.data.message);
-    //       setData((prevData) => ({
-    //         ...prevData,
-    //         password: '',
-    //         newPassword: '',
-    //         confirmPassword: '',
-    //       }));
-    //     } else {
-    //       toast.error(response.data.message);
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast.error(error.response.data.message);
-    //   }
-    // };
 
     try {
       const response = await axios.patch(`${url}/api/user/update/${userObj.data._id}`, formData, {
@@ -191,7 +165,7 @@ const UserProfile = () => {
 
             <label>
               <span>Address:</span>
-              <input
+              <textarea
                 type='text'
                 placeholder='Your Address'
                 name='address'
@@ -224,7 +198,9 @@ const UserProfile = () => {
             </label>
 
             <label>
-              <span>New Password:</span>
+              <span>
+                New Password: <p className='input-noti'> (*Leave blank if you don&apos;t want to change your password)</p>
+              </span>
               <input
                 type="password"
                 name='newPassword'
@@ -235,7 +211,9 @@ const UserProfile = () => {
             </label>
 
             <label>
-              <span>Confirm Password:</span>
+              <span>
+                Confirm Password: <p className='input-noti'> (*Leave blank if you don&apos;t want to change your password)</p>
+              </span>
               <input
                 type="password"
                 name='confirmPassword'

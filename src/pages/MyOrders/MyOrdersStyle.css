@@ -28,21 +28,21 @@
   color: #454545;
   border: 1px solid tomato;
   border-radius: 8px;
-  background-color: #fff; /* แบ็คกราวด์ปกติ */
+  background-color: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเบา */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .my-orders-order:hover {
   transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มความเข้มของเงาเมื่อ hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* ปิดการซูมเมื่อสถานะเป็น Delivered */
+/* Disaable zoom when shadow for Delivered */
 .my-orders-order[data-status="Delivered"]:hover {
-  transform: none; /* ไม่มีการซูม */
-  box-shadow: none; /* ไม่มีการเพิ่มเงา */
-}
+  transform: none;
+  box-shadow: none;
+} 
 
 .my-orders-order hr {
   display: none;
@@ -68,21 +68,20 @@
   padding: 12px 0;
   border: 1px solid tomato;
   border-radius: 4px;
-  background-color: white; /* ปุ่มปกติ */
+  background-color: white;
   color: #454545;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* เพิ่ม transition */
+  transition: background-color 0.3s ease;
 }
 
 .my-orders-order button:hover {
-  background-color: tomato; /* สีเมื่อ hover */
-  color: white; /* สีข้อความเมื่อ hover */
+  background-color: tomato;
+  color: white;
 }
 
-/* ป้องกันไม่ให้ปุ่มที่ถูกปิดใช้งาน hover */
 .my-orders-order .btn-disabled:hover {
-  background-color: #f0f0f0; /* รักษาสีพื้นหลัง */
-  color: gray; /* รักษาสีตัวอักษร */
+  background-color: #f0f0f0;
+  color: gray;
 }
 
 .status-completed {
@@ -112,20 +111,20 @@
 
 .btn-disabled {
   border: none;
-  pointer-events: none; /* ปิดการคลิก */
-  cursor: default; /* ปิดการเปลี่ยนเคอร์เซอร์ */
-  color: gray; /* สีตัวอักษร */
-  background-color: #f0f0f0; /* สีพื้นหลัง */
-  opacity: 0.6; /* ทำให้ปุ่มดูจางลง */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
-  border-radius: 5px; /* มุมโค้ง */
-  padding: 10px 15px; /* Padding */
-  transition: background-color 0.3s ease; /* เพิ่มการเปลี่ยนแปลงสีพื้นหลัง */
+  pointer-events: none;
+  cursor: default;
+  color: gray;
+  background-color: #f0f0f0;
+  opacity: 0.6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
 }
 
 .btn-disabled:hover {
-  background-color: #e0e0e0; /* เปลี่ยนสีพื้นหลังเมื่อชี้ */
-  color: #888; /* รักษาสีของข้อความ */
+  background-color: #e0e0e0;
+  color: #888;
 }
 
 /* Media Queries for Responsiveness */

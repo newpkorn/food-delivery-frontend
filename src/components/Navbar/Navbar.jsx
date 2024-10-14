@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useState, useContext, useEffect } from 'react';
 import './NavbarStyle.css';
@@ -17,7 +16,7 @@ import { LuUser } from "react-icons/lu";
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const [loading, setLoading] = useState(true);
-  const { url, getTotalCartAmount, getTotalItemsInCart, token, setToken, userObj } = useContext(StoreContext);
+  const { getTotalCartAmount, getTotalItemsInCart, token, setToken, userObj } = useContext(StoreContext);
 
   const navbarMenu = ["Home", "Menu", "Mobile App", "Contact Us"];
 

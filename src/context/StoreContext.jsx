@@ -1,6 +1,5 @@
-/* eslint-disable no-const-assign */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -16,19 +15,6 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [food_list, setFoodList] = useState([]);
   const [userObj, setUserObj] = useState({});
-
-  // const getMe = async (token) => {
-  //   try {
-  //     const response = await axios.get(url + "/api/user/me", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     setUserObj(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
 
   const getMe = async (token) => {
     try {
@@ -114,21 +100,6 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-  // const getTotalItemsInCart = () => {
-  //   let totalAmount = 0;
-  //   // console.log("Cart Items:", cartItems); // ตรวจสอบ cartItems
-  //   if (cartItems && Object.keys(cartItems).length > 0) {
-  //     for (const item in cartItems) {
-  //       console.log(`Item: ${item}, Quantity: ${cartItems[item].quantity}`); // ตรวจสอบแต่ละไอเทม
-  //       if (cartItems[item] && cartItems[item].quantity > 0) {
-  //         totalAmount += cartItems[item].quantity;
-  //       }
-  //     }
-  //   }
-  //   // console.log("Total Amount Before Return:", totalAmount); // ตรวจสอบ totalAmount
-  //   return totalAmount;
-  // };
-
   const fetchFoodList = async () => {
     try {
       const response = await axios.get(url + '/api/food/list/');
@@ -137,25 +108,6 @@ const StoreContextProvider = (props) => {
       console.error('Error fetching food list:', error);
     }
   };
-
-  // const fetchCartItems = async (token) => {
-  //   try {
-  //     const response = await axios.post(url + '/api/cart/get', {}, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     });
-
-  //     if (response.data.success) {
-  //       setCartItems(response.data.cartData);
-  //     } else {
-  //       console.warn('Failed to fetch cart items');
-  //       setCartItems({}); // set basket to empty if not success
-  //     }
-  //   } catch (error) {
-  //     console.error('Error fetching cart items:', error.response ? error.response.data : error.message);
-  //   }
-  // };
 
   const fetchCartItems = async (token) => {
     try {
@@ -211,70 +163,6 @@ const StoreContextProvider = (props) => {
 
     fetchData();
   }, []);
-
-  // const fetchCartItems = async (token) => {
-  //   try {
-  //     const response = await axios.post(url + '/api/cart/get', {}, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-
-  //     if (response.data.success) {
-  //       const cartData = response.data.cartData;
-  //       setCartItems(cartData);
-  //       localStorage.setItem('cartItems', JSON.stringify(cartData)); // อัปเดต localStorage ด้วย cartData จาก backend
-  //     } else {
-  //       console.warn('Failed to fetch cart items');
-  //       setCartItems({});
-  //     }
-  //   } catch (error) {
-  //     if (error.response && error.response.status === 401 && error.response.data.message === "Token expired") {
-  //       localStorage.removeItem("token");
-  //       setToken("");
-  //       navigate('/');
-  //     } else {
-  //       console.error('Error fetching cart items:', error.response ? error.response.data : error.message);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     await fetchFoodList();
-
-  //     // ดึงข้อมูลจาก localStorage และแปลงกลับเป็น object
-  //     const savedCartItems = localStorage.getItem('cartItems');
-  //     if (savedCartItems) {
-  //       try {
-  //         setCartItems(JSON.parse(savedCartItems));
-  //       } catch (error) {
-  //         console.error("Error parsing savedCartItems:", error);
-  //         setCartItems({}); // ถ้าแปลงไม่สำเร็จ ให้ตั้งเป็น empty obj
-  //       }
-  //     } else {
-  //       setCartItems({});
-  //     }
-
-  //     const token = localStorage.getItem("token");
-  //     if (token) {
-  //       setToken(token);
-  //       await fetchCartItems(token); // ดึงข้อมูลจาก backend ถ้ามี token
-  //       await getMe(token);
-  //     }
-  //   }
-
-  //   fetchData();
-  // }, []);
-
-  // เพิ่ม useEffect เพื่อตรวจสอบเมื่อ cartItems ถูกอัปเดต
-  // useEffect(() => {
-  //   console.log('Backed host: ', import.meta.env.VITE_API_URL);
-  //   if (cartItems && Object.keys(cartItems).length > 0) {
-  //     console.log("Cart items updated:", cartItems);
-  //   }
-  // }, [cartItems]);
-
 
   const contextValue = {
     food_list,

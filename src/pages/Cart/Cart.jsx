@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-unused-vars */
 import { useContext } from 'react';
 import './CartStyle.css';
 import { StoreContext } from '../../context/StoreContext';

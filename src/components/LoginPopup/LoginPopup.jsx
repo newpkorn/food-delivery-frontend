@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import { useState, useEffect, useContext } from 'react';
 import './LoginPopupStyle.css';
 import { imageIcon } from '../../constants/image-icon';

@@ -63,6 +63,21 @@ h1 {
   margin: 20px 0;
 }
 
+.profile-info textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.profile-info .input-noti {
+  font-size: xx-small;
+  color: red;
+}
+
 label {
   display: block;
   margin-bottom: 10px;
