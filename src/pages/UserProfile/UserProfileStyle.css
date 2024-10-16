@@ -1,4 +1,5 @@
 .user-profile-container {
+  font-size: 16px;
   width: 90%;
   max-width: 500px;
   margin: 150px auto;
@@ -24,14 +25,13 @@ h1 {
 }
 
 .file-input {
-  display: none; /* ซ่อน input file */
+  display: none;
 }
 
 .profile-image {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 1px solid rgb(232, 162, 150);
   overflow: hidden;
   margin: 0 auto 10px;
   display: flex;
@@ -46,10 +46,13 @@ h1 {
   display: block;
 }
 
-
 .placeholder-icon {
   font-size: 50px;
   color: tomato;
+}
+
+.no-image {
+  border: 1px solid rgb(232, 162, 150);
 }
 
 .upload-icon {

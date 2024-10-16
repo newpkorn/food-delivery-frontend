@@ -157,7 +157,6 @@ const StoreContextProvider = (props) => {
         setToken(token);
         await fetchCartItems(token);
         await getMe(token);
-        await fetchCartItems(token);
       }
     }
 

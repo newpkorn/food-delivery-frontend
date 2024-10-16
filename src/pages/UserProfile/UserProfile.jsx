@@ -122,7 +122,7 @@ const UserProfile = () => {
               accept='image/*'
               onChange={handleImageUpload}
             />
-            <div className='profile-image'>
+            <div className={'profile-image' + (!userObj?.data?.image ? ' no-image' : '')}>
               {profileImage ? (
                 <img src={URL.createObjectURL(profileImage)} alt="Profile" />
               ) : userObj?.data?.image ? (
