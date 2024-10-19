@@ -148,20 +148,28 @@ const StoreContextProvider = (props) => {
           setCartItems({}); // set to empty obj if parsing not success
         }
       } else {
-        // if no savedCartItems, set to empty obj
         setCartItems({});
       }
 
       const token = localStorage.getItem("token");
       if (token) {
-        setToken(token);
-        await fetchCartItems(token);
-        await getMe(token);
+        try {
+          setToken(token);
+          await fetchCartItems(token);
+          await getMe(token);
+        } catch (error) {
+          if (error.response?.status === 401 && error.response?.data?.message === 'Token expired') {
+            localStorage.removeItem('token');
+            setToken(null);
+            navigate('/');
+          }
+        }
       }
     }
 
     fetchData();
   }, []);
+
 
   const contextValue = {
     food_list,
