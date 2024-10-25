@@ -86,7 +86,7 @@ const MyOrders = () => {
                   <hr />
 
                   <p>
-                    Items: {order.items.length}
+                    Items: {order.items.reduce((acc, item) => acc + item.quantity, 0)}
                   </p>
                   <hr />
 
