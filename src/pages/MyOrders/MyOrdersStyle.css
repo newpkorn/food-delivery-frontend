@@ -128,6 +128,42 @@
 }
 
 /* Media Queries for Responsiveness */
+@media (max-width: 1400px) { /* iPad Pro Roate */
+  .my-orders {
+    margin: 150px 20px;
+  }
+
+  .my-orders-order {
+    grid-template-columns: 1fr 2.5fr 1fr; /* Adjust columns */
+    font-size: 12px;
+  }
+
+  .my-orders-order button {
+    font-size: 10px;
+  }
+  .my-orders-order hr {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) { /* iPad Air Rotate */
+  .my-orders {
+    margin: 150px 20px;
+  }
+
+  .my-orders-order {
+    grid-template-columns: 1fr 2.5fr 1fr; /* Adjust columns */
+    font-size: 12px;
+  }
+
+  .my-orders-order button {
+    font-size: 10px;
+  }
+  .my-orders-order hr {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) { /* iPad Pro */
   .my-orders {
     margin: 150px 20px;
