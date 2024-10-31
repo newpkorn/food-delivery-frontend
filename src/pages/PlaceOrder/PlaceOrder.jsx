@@ -5,6 +5,9 @@ import { StoreContext } from '../../context/StoreContext';
 import { DELIVERY_FEE } from '../../constants/delivery-fee';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { io } from 'socket.io-client';
+
+const socket = io(import.meta.env.VITE_API_URL);
 
 const PlaceOrder = () => {
 
@@ -52,6 +55,7 @@ const PlaceOrder = () => {
         },
       });
       if (response.data.success) {
+        socket.emit('newOrder', orderData);
         const { session_url } = response.data;
         window.location.replace(session_url);
       } else {

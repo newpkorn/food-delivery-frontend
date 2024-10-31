@@ -59,57 +59,58 @@ const MyOrders = () => {
           </div>
         ) : (
           data.length > 0 ? (
-            data.map((order) => {
-              const currentStatus = orderStatuses[order._id] || order.status;
+            data
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+              .map((order) => {
+                const currentStatus = orderStatuses[order._id] || order.status;
+                return (
+                  <div key={order._id} className="my-orders-order" data-status={currentStatus}>
+                    <p className='img-status-container'>
+                      <img className='img-status' src={
+                        currentStatus === "Delivered" ? imageIcon.delivered
+                          : currentStatus === "Out for delivery" ? imageIcon.out_for_delivery
+                            : imageIcon.food_process
+                      } alt="Order Status" />
+                    </p>
+                    <p>
+                      {order.items.map((item, index) => (
+                        index === order.items.length - 1
+                          ? item.name + " x " + item.quantity
+                          : item.name + " x " + item.quantity + ", "
+                      ))}
+                    </p>
+                    <hr />
 
-              return (
-                <div key={order._id} className="my-orders-order" data-status={currentStatus}>
-                  <p className='img-status-container'>
-                    <img className='img-status' src={
-                      currentStatus === "Delivered" ? imageIcon.delivered
-                        : currentStatus === "Out for delivery" ? imageIcon.out_for_delivery
-                          : imageIcon.food_process
-                    } alt="Order Status" />
-                  </p>
-                  <p>
-                    {order.items.map((item, index) => (
-                      index === order.items.length - 1
-                        ? item.name + " x " + item.quantity
-                        : item.name + " x " + item.quantity + ", "
-                    ))}
-                  </p>
-                  <hr />
+                    <p>
+                      ฿{order.amount}.00
+                    </p>
+                    <hr />
 
-                  <p>
-                    ฿{order.amount}.00
-                  </p>
-                  <hr />
+                    <p>
+                      Items: {order.items.reduce((acc, item) => acc + item.quantity, 0)}
+                    </p>
+                    <hr />
 
-                  <p>
-                    Items: {order.items.reduce((acc, item) => acc + item.quantity, 0)}
-                  </p>
-                  <hr />
+                    <p>
+                      <span className={
+                        currentStatus === "Delivered"
+                          ? 'status-completed'
+                          : currentStatus === "Out for delivery"
+                            ? 'status-out-for-delivery'
+                            : 'status-processing'
+                      }>&#x25cf; </span>
+                      <b>{currentStatus}</b>
+                    </p>
 
-                  <p>
-                    <span className={
-                      currentStatus === "Delivered"
-                        ? 'status-completed'
-                        : currentStatus === "Out for delivery"
-                          ? 'status-out-for-delivery'
-                          : 'status-processing'
-                    }>&#x25cf; </span>
-                    <b>{currentStatus}</b>
-                  </p>
-
-                  <button
-                    onClick={() => trackingOrder(order._id)}
-                    className={currentStatus === "Delivered" ? 'btn-disabled' : ''}
-                  >
-                    Tracking
-                  </button>
-                </div>
-              );
-            })
+                    <button
+                      onClick={() => trackingOrder(order._id)}
+                      className={currentStatus === "Delivered" ? 'btn-disabled' : ''}
+                    >
+                      Tracking
+                    </button>
+                  </div>
+                );
+              })
           ) : (
             <p>No order found!!</p>
           )
