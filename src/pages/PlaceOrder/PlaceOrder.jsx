@@ -7,11 +7,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 
-const socket = io(import.meta.env.VITE_API_URL);
-
 const PlaceOrder = () => {
-
   const { getTotalCartAmount, token, food_list, cartItems, url } = useContext(StoreContext);
+  const [socket, setSocket] = useState(null);
 
   const [data, setData] = useState({
     firstName: '',
@@ -33,14 +31,10 @@ const PlaceOrder = () => {
 
   const placeOrder = async (e) => {
     e.preventDefault();
-    let orderItems = [];
-    food_list.map((item) => {
-      if (cartItems[item._id] > 0) {
-        let itemInfo = item;
-        itemInfo['quantity'] = cartItems[item._id];
-        orderItems.push(itemInfo);
-      }
-    });
+    let orderItems = food_list.filter(item => cartItems[item._id] > 0).map(item => ({
+      ...item,
+      quantity: cartItems[item._id]
+    }));
 
     let orderData = {
       address: data,
@@ -49,7 +43,7 @@ const PlaceOrder = () => {
     };
 
     try {
-      let response = await axios.post(url + '/api/order/place', orderData, {
+      let response = await axios.post(`${url}/api/order/place`, orderData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -65,7 +59,6 @@ const PlaceOrder = () => {
       console.error("Order placement error:", error);
       alert("Order placement failed: " + error.message);
     }
-
   };
 
   const navigate = useNavigate();
@@ -74,11 +67,19 @@ const PlaceOrder = () => {
     if (!token) {
       alert('Please log in to continue with the payment.');
       navigate('/cart');
-    }
-    else if (getTotalCartAmount() === 0) {
+    } else if (getTotalCartAmount() === 0) {
       navigate('/cart');
     }
   }, [token]);
+
+  useEffect(() => {
+    const newSocket = io(url);
+    setSocket(newSocket);
+
+    return () => {
+      newSocket.disconnect();
+    };
+  }, [url]);
 
   return (
     <form onSubmit={placeOrder} className='place-order'>
@@ -117,7 +118,7 @@ const PlaceOrder = () => {
         <input
           name='street'
           type="text"
-          placeholder="Stress"
+          placeholder="Street"
           required
           onChange={onChangeHandler}
           value={data.street}
