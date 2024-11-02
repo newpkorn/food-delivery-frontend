@@ -73,7 +73,9 @@ const PlaceOrder = () => {
   }, [token]);
 
   useEffect(() => {
-    const newSocket = io(url);
+    const newSocket = io(url, {
+      transports: ['websocket'],
+    });
     setSocket(newSocket);
 
     return () => {
