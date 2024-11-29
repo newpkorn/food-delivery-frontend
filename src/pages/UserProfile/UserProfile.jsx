@@ -5,10 +5,12 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import { LuUser } from "react-icons/lu";
 import { FaCameraRetro } from "react-icons/fa";
+import ReactLoading from 'react-loading';
 
 const UserProfile = () => {
   const { url, token, userObj } = useContext(StoreContext);
   const [profileImage, setProfileImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     name: userObj?.data?.name || '',
     email: userObj?.data?.email || '',
@@ -22,6 +24,9 @@ const UserProfile = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    setIsLoading(true);
+
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('email', data.email);
@@ -80,6 +85,8 @@ const UserProfile = () => {
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -111,122 +118,128 @@ const UserProfile = () => {
   return (
     <div className="user-profile">
       <ToastContainer />
-      <div className='user-profile-container'>
-        <h1>User Profile</h1>
-        <div className='profile-picture'>
-          <label htmlFor='profile-upload' className='upload-label'>
-            <input
-              type='file'
-              id='profile-upload'
-              className='file-input'
-              accept='image/*'
-              onChange={handleImageUpload}
-            />
-            <div className={'profile-image' + (!userObj?.data?.image ? ' no-image' : '')}>
-              {profileImage ? (
-                <img src={URL.createObjectURL(profileImage)} alt="Profile" />
-              ) : userObj?.data?.image ? (
-                <img src={url + '/images/users/' + userObj.data._id + '/' + userObj?.data?.image} alt="User Image" />
-              ) : (
-                <LuUser className='placeholder-icon' />
-              )}
-            </div>
-            <div className="upload-icon">
-              <FaCameraRetro />
-            </div>
-          </label>
+      {isLoading ?
+        <div className="loading-container">
+          <ReactLoading type="spin" color="black" height={'20%'} width={'20%'} />
         </div>
-
-        <form onSubmit={handleFormSubmit}>
-          <div className='profile-info'>
-            <label>
-              <span>Name:</span>
+        :
+        <div className='user-profile-container'>
+          <h1>User Profile</h1>
+          <div className='profile-picture'>
+            <label htmlFor='profile-upload' className='upload-label'>
               <input
-                type="text"
-                name='name'
-                placeholder='Your Name'
-                required
-                onChange={onChangeHandler}
-                value={data.name}
+                type='file'
+                id='profile-upload'
+                className='file-input'
+                accept='image/*'
+                onChange={handleImageUpload}
               />
-            </label>
-
-            <label>
-              <span>Email:</span>
-              <input
-                type="email"
-                name='email'
-                placeholder='Your Email'
-                required
-                onChange={onChangeHandler}
-                value={data.email}
-              />
-            </label>
-
-            <label>
-              <span>Address:</span>
-              <textarea
-                type='text'
-                placeholder='Your Address'
-                name='address'
-                onChange={onChangeHandler}
-                value={data.address} />
-            </label>
-
-            <label>
-              <span>Phone Number:</span>
-              <input
-                type="text"
-                name='phoneNumber'
-                placeholder='Your Phone Number'
-                required
-                onChange={onChangeHandler}
-                value={data.phoneNumber}
-              />
-            </label>
-
-            <label>
-              <span>Password:</span>
-              <input
-                type="password"
-                name='password'
-                placeholder='Current Password'
-                required
-                onChange={onChangeHandler}
-                value={data.password}
-              />
-            </label>
-
-            <label>
-              <span>
-                New Password: <p className='input-noti'> (*Leave blank if you don&apos;t want to change your password)</p>
-              </span>
-              <input
-                type="password"
-                name='newPassword'
-                placeholder='New Password'
-                onChange={onChangeHandler}
-                value={data.newPassword}
-              />
-            </label>
-
-            <label>
-              <span>
-                Confirm Password: <p className='input-noti'> (*Leave blank if you don&apos;t want to change your password)</p>
-              </span>
-              <input
-                type="password"
-                name='confirmPassword'
-                placeholder='Confirm New Password'
-                onChange={onChangeHandler}
-                value={data.confirmPassword}
-              />
+              <div className={'profile-image' + (!userObj?.data?.image ? ' no-image' : '')}>
+                {profileImage ? (
+                  <img src={URL.createObjectURL(profileImage)} alt="Profile" />
+                ) : userObj?.data?.image ? (
+                  <img src={userObj?.data?.image} alt="User Image" />
+                ) : (
+                  <LuUser className='placeholder-icon' />
+                )}
+              </div>
+              <div className="upload-icon">
+                <FaCameraRetro />
+              </div>
             </label>
           </div>
 
-          <button type='submit' className='update-button'>Update Information</button>
-        </form>
-      </div>
+          <form onSubmit={handleFormSubmit}>
+            <div className='profile-info'>
+              <label>
+                <span>Name:</span>
+                <input
+                  type="text"
+                  name='name'
+                  placeholder='Your Name'
+                  required
+                  onChange={onChangeHandler}
+                  value={data.name}
+                />
+              </label>
+
+              <label>
+                <span>Email:</span>
+                <input
+                  type="email"
+                  name='email'
+                  placeholder='Your Email'
+                  required
+                  onChange={onChangeHandler}
+                  value={data.email}
+                />
+              </label>
+
+              <label>
+                <span>Address:</span>
+                <textarea
+                  type='text'
+                  placeholder='Your Address'
+                  name='address'
+                  onChange={onChangeHandler}
+                  value={data.address} />
+              </label>
+
+              <label>
+                <span>Phone Number:</span>
+                <input
+                  type="text"
+                  name='phoneNumber'
+                  placeholder='Your Phone Number'
+                  required
+                  onChange={onChangeHandler}
+                  value={data.phoneNumber}
+                />
+              </label>
+
+              <label>
+                <span>Password:</span>
+                <input
+                  type="password"
+                  name='password'
+                  placeholder='Current Password'
+                  required
+                  onChange={onChangeHandler}
+                  value={data.password}
+                />
+              </label>
+
+              <label>
+                <span>
+                  New Password: <p className='input-noti'> (*Leave blank if you don&apos;t want to change your password)</p>
+                </span>
+                <input
+                  type="password"
+                  name='newPassword'
+                  placeholder='New Password'
+                  onChange={onChangeHandler}
+                  value={data.newPassword}
+                />
+              </label>
+
+              <label>
+                <span>
+                  Confirm Password: <p className='input-noti'> (*Leave blank if you don&apos;t want to change your password)</p>
+                </span>
+                <input
+                  type="password"
+                  name='confirmPassword'
+                  placeholder='Confirm New Password'
+                  onChange={onChangeHandler}
+                  value={data.confirmPassword}
+                />
+              </label>
+            </div>
+
+            <button type='submit' className='update-button'>Update Information</button>
+          </form>
+        </div>
+      }
     </div>
   );
 };
