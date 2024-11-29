@@ -99,7 +99,8 @@ const LoginPopup = ({ setShowLogin }) => {
           >
             <MdError className='icon' />
             {alert.message}
-          </motion.div>}
+          </motion.div>
+        }
         <div className="login-popup-title">
           <h2>{currState}</h2>
           <img onClick={() => setShowLogin(false)} src={imageIcon.cross_icon} alt="" />
