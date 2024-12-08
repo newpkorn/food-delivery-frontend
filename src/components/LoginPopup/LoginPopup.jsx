@@ -45,9 +45,7 @@ const LoginPopup = ({ setShowLogin }) => {
     }
 
     try {
-      const response = await axios.post(newUrl, dataToSend, {
-        withCredentials: true,
-      });
+      const response = await axios.post(newUrl, dataToSend);
 
       setAlert({
         type: response.data.success ? 'success' : 'error',
