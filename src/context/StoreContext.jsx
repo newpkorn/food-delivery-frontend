@@ -1,36 +1,39 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-
   const url = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const [cartItems, setCartItems] = useState({});
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
   const [food_list, setFoodList] = useState([]);
   const [userObj, setUserObj] = useState({});
 
   const getMe = async (token) => {
     try {
-      const response = await axios.get(url + "/api/user/me", {
+      const response = await axios.get(url + '/api/user/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setUserObj(response.data);
     } catch (error) {
-      if (error.response && error.response.status === 401 && error.response.data.message === "Token expired") {
-        localStorage.removeItem("token");
-        setToken("");
+      if (
+        error.response &&
+        error.response.status === 401 &&
+        error.response.data.message === 'Token expired'
+      ) {
+        localStorage.removeItem('token');
+        setToken('');
         navigate('/');
       } else {
-        console.error("Error fetching user data:", error);
+        console.error('Error fetching user data:', error);
       }
     }
   };
@@ -48,12 +51,15 @@ const StoreContextProvider = (props) => {
           { itemId },
           {
             headers: {
-              Authorization: `Bearer ${token}`
-            }
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
       } catch (error) {
-        console.error('Error adding to cart:', error.response ? error.response.data : error.message);
+        console.error(
+          'Error adding to cart:',
+          error.response ? error.response.data : error.message
+        );
       }
     }
   };
@@ -67,12 +73,15 @@ const StoreContextProvider = (props) => {
           { itemId },
           {
             headers: {
-              Authorization: `Bearer ${token}`
-            }
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
       } catch (error) {
-        console.error('Error adding to cart:', error.response ? error.response.data : error.message);
+        console.error(
+          'Error adding to cart:',
+          error.response ? error.response.data : error.message
+        );
       }
     }
   };
@@ -111,11 +120,15 @@ const StoreContextProvider = (props) => {
 
   const fetchCartItems = async (token) => {
     try {
-      const response = await axios.post(url + '/api/cart/get', {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        url + '/api/cart/get',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.data.success) {
         setCartItems(response.data.cartData);
@@ -124,12 +137,19 @@ const StoreContextProvider = (props) => {
         setCartItems({}); // set basket to empty if not success
       }
     } catch (error) {
-      if (error.response && error.response.status === 401 && error.response.data.message === "Token expired") {
-        localStorage.removeItem("token");
-        setToken("");
+      if (
+        error.response &&
+        error.response.status === 401 &&
+        error.response.data.message === 'Token expired'
+      ) {
+        localStorage.removeItem('token');
+        setToken('');
         navigate('/');
       } else {
-        console.error('Error fetching cart items:', error.response ? error.response.data : error.message);
+        console.error(
+          'Error fetching cart items:',
+          error.response ? error.response.data : error.message
+        );
       }
     }
   };
@@ -144,21 +164,24 @@ const StoreContextProvider = (props) => {
         try {
           setCartItems(savedCartItems);
         } catch (error) {
-          console.error("Error parsing savedCartItems:", error);
+          console.error('Error parsing savedCartItems:', error);
           setCartItems({}); // set to empty obj if parsing not success
         }
       } else {
         setCartItems({});
       }
 
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (token) {
         try {
           setToken(token);
           await fetchCartItems(token);
           await getMe(token);
         } catch (error) {
-          if (error.response?.status === 401 && error.response?.data?.message === 'Token expired') {
+          if (
+            error.response?.status === 401 &&
+            error.response?.data?.message === 'Token expired'
+          ) {
             localStorage.removeItem('token');
             setToken(null);
             navigate('/');
@@ -169,7 +192,6 @@ const StoreContextProvider = (props) => {
 
     fetchData();
   }, []);
-
 
   const contextValue = {
     food_list,
@@ -192,8 +214,6 @@ const StoreContextProvider = (props) => {
       {props.children}
     </StoreContext.Provider>
   );
-
 };
-
 
 export default StoreContextProvider;
