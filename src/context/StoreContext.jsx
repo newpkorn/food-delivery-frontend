@@ -17,7 +17,7 @@ const StoreContextProvider = (props) => {
 
   const getMe = async (token) => {
     try {
-      const response = await axios.get(url + '/api/user/me', {
+      const response = await axios.get(url + '/api/user/getMe', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -47,7 +47,7 @@ const StoreContextProvider = (props) => {
     if (token) {
       try {
         await axios.post(
-          url + '/api/cart/add',
+          url + '/api/cart/addCart',
           { itemId },
           {
             headers: {
@@ -69,7 +69,7 @@ const StoreContextProvider = (props) => {
     if (token) {
       try {
         await axios.post(
-          url + '/api/cart/remove',
+          url + '/api/cart/removeCart',
           { itemId },
           {
             headers: {
@@ -121,7 +121,7 @@ const StoreContextProvider = (props) => {
   const fetchCartItems = async (token) => {
     try {
       const response = await axios.post(
-        url + '/api/cart/get',
+        url + '/api/cart/getCart',
         {},
         {
           headers: {
