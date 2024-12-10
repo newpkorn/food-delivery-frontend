@@ -3,8 +3,8 @@ import { useState, useContext, useEffect } from 'react';
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
-import { LuUser } from "react-icons/lu";
-import { FaCameraRetro } from "react-icons/fa";
+import { LuUser } from 'react-icons/lu';
+import { FaCameraRetro } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
 
 const UserProfile = () => {
@@ -51,12 +51,16 @@ const UserProfile = () => {
     }
 
     try {
-      const response = await axios.patch(`${url}/api/user/update/${userObj.data._id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
+      const response = await axios.patch(
+        `${url}/api/user/update/${userObj.data._id}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       if (response.data.success) {
         toast.success(response.data.message);
@@ -67,21 +71,22 @@ const UserProfile = () => {
           confirmPassword: '',
         }));
 
-        localStorage.setItem('userData', JSON.stringify({
-          name: data.name,
-          email: data.email,
-          address: data.address,
-          phoneNumber: data.phoneNumber,
-        }));
+        localStorage.setItem(
+          'userData',
+          JSON.stringify({
+            name: data.name,
+            email: data.email,
+            address: data.address,
+            phoneNumber: data.phoneNumber,
+          })
+        );
 
         setTimeout(() => {
           window.location.reload();
         }, 3000);
-
       } else {
         toast.error(response.data.message);
       }
-
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -114,33 +119,41 @@ const UserProfile = () => {
     localStorage.removeItem('userData');
   }, []);
 
-
   return (
     <div className="user-profile">
       <ToastContainer />
-      {isLoading ?
+      {isLoading ? (
         <div className="loading-container">
-          <ReactLoading type="spin" color="black" height={'20%'} width={'20%'} />
+          <ReactLoading
+            type="spin"
+            color="tomato"
+            height={'20%'}
+            width={'20%'}
+          />
         </div>
-        :
-        <div className='user-profile-container'>
+      ) : (
+        <div className="user-profile-container">
           <h1>User Profile</h1>
-          <div className='profile-picture'>
-            <label htmlFor='profile-upload' className='upload-label'>
+          <div className="profile-picture">
+            <label htmlFor="profile-upload" className="upload-label">
               <input
-                type='file'
-                id='profile-upload'
-                className='file-input'
-                accept='image/*'
+                type="file"
+                id="profile-upload"
+                className="file-input"
+                accept="image/*"
                 onChange={handleImageUpload}
               />
-              <div className={'profile-image' + (!userObj?.data?.image ? ' no-image' : '')}>
+              <div
+                className={
+                  'profile-image' + (!userObj?.data?.image ? ' no-image' : '')
+                }
+              >
                 {profileImage ? (
                   <img src={URL.createObjectURL(profileImage)} alt="Profile" />
                 ) : userObj?.data?.image ? (
                   <img src={userObj?.data?.image} alt="User Image" />
                 ) : (
-                  <LuUser className='placeholder-icon' />
+                  <LuUser className="placeholder-icon" />
                 )}
               </div>
               <div className="upload-icon">
@@ -150,13 +163,13 @@ const UserProfile = () => {
           </div>
 
           <form onSubmit={handleFormSubmit}>
-            <div className='profile-info'>
+            <div className="profile-info">
               <label>
                 <span>Name:</span>
                 <input
                   type="text"
-                  name='name'
-                  placeholder='Your Name'
+                  name="name"
+                  placeholder="Your Name"
                   required
                   onChange={onChangeHandler}
                   value={data.name}
@@ -167,8 +180,8 @@ const UserProfile = () => {
                 <span>Email:</span>
                 <input
                   type="email"
-                  name='email'
-                  placeholder='Your Email'
+                  name="email"
+                  placeholder="Your Email"
                   required
                   onChange={onChangeHandler}
                   value={data.email}
@@ -178,19 +191,20 @@ const UserProfile = () => {
               <label>
                 <span>Address:</span>
                 <textarea
-                  type='text'
-                  placeholder='Your Address'
-                  name='address'
+                  type="text"
+                  placeholder="Your Address"
+                  name="address"
                   onChange={onChangeHandler}
-                  value={data.address} />
+                  value={data.address}
+                />
               </label>
 
               <label>
                 <span>Phone Number:</span>
                 <input
                   type="text"
-                  name='phoneNumber'
-                  placeholder='Your Phone Number'
+                  name="phoneNumber"
+                  placeholder="Your Phone Number"
                   required
                   onChange={onChangeHandler}
                   value={data.phoneNumber}
@@ -201,8 +215,8 @@ const UserProfile = () => {
                 <span>Password:</span>
                 <input
                   type="password"
-                  name='password'
-                  placeholder='Current Password'
+                  name="password"
+                  placeholder="Current Password"
                   required
                   onChange={onChangeHandler}
                   value={data.password}
@@ -211,12 +225,17 @@ const UserProfile = () => {
 
               <label>
                 <span>
-                  New Password: <p className='input-noti'> (*Leave blank if you don&apos;t want to change your password)</p>
+                  New Password:{' '}
+                  <p className="input-noti">
+                    {' '}
+                    (*Leave blank if you don&apos;t want to change your
+                    password)
+                  </p>
                 </span>
                 <input
                   type="password"
-                  name='newPassword'
-                  placeholder='New Password'
+                  name="newPassword"
+                  placeholder="New Password"
                   onChange={onChangeHandler}
                   value={data.newPassword}
                 />
@@ -224,22 +243,29 @@ const UserProfile = () => {
 
               <label>
                 <span>
-                  Confirm Password: <p className='input-noti'> (*Leave blank if you don&apos;t want to change your password)</p>
+                  Confirm Password:{' '}
+                  <p className="input-noti">
+                    {' '}
+                    (*Leave blank if you don&apos;t want to change your
+                    password)
+                  </p>
                 </span>
                 <input
                   type="password"
-                  name='confirmPassword'
-                  placeholder='Confirm New Password'
+                  name="confirmPassword"
+                  placeholder="Confirm New Password"
                   onChange={onChangeHandler}
                   value={data.confirmPassword}
                 />
               </label>
             </div>
 
-            <button type='submit' className='update-button'>Update Information</button>
+            <button type="submit" className="update-button">
+              Update Information
+            </button>
           </form>
         </div>
-      }
+      )}
     </div>
   );
 };
