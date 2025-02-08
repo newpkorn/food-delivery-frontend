@@ -89,7 +89,11 @@ const LoginPopup = ({ setShowLogin }) => {
 
   return (
     <div className="login-popup">
-      <form onSubmit={onLogin} className="login-popup-container">
+      <form
+        onSubmit={onLogin}
+        className="login-popup-container"
+        id="login-popup"
+      >
         {alert.message && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -97,7 +101,7 @@ const LoginPopup = ({ setShowLogin }) => {
             className={`alert-container alert-${alert.type}`}
           >
             <MdError className="icon" />
-            {alert.message}
+            <p id="alert-msg">{alert.message}</p>
           </motion.div>
         )}
         <div className="login-popup-title">
@@ -113,6 +117,7 @@ const LoginPopup = ({ setShowLogin }) => {
             <>
               <input
                 type="email"
+                id="email"
                 name="email"
                 placeholder="Your Email"
                 required
@@ -121,6 +126,7 @@ const LoginPopup = ({ setShowLogin }) => {
               />
               <input
                 type="password"
+                id="password"
                 name="password"
                 placeholder="Your Password"
                 required
@@ -132,6 +138,7 @@ const LoginPopup = ({ setShowLogin }) => {
             <>
               <input
                 type="text"
+                id="name"
                 name="name"
                 placeholder="Your Name"
                 required
@@ -140,6 +147,7 @@ const LoginPopup = ({ setShowLogin }) => {
               />
               <input
                 type="email"
+                id="email"
                 name="email"
                 placeholder="Your Email"
                 required
@@ -148,6 +156,7 @@ const LoginPopup = ({ setShowLogin }) => {
               />
               <input
                 type="password"
+                id="password"
                 name="password"
                 placeholder="Your Password"
                 required
@@ -165,20 +174,26 @@ const LoginPopup = ({ setShowLogin }) => {
             </>
           )}
         </div>
-        <button>{currState === 'Sign Up' ? 'Create account' : 'Login'}</button>
+        <button id={`btn-${currState}`}>
+          {currState === 'Sign-Up' ? 'Create account' : 'Login'}
+        </button>
         <div className="login-popup-condition">
-          <input type="checkbox" required />
+          <input id="terms-and-conditons" type="checkbox" required />
           <p>By continuing, I agree to the terms of use & privacy policy.</p>
         </div>
         {currState === 'Login' ? (
           <p>
             Create a new account?{' '}
-            <span onClick={() => setCurrState('Sign Up')}>Click here</span>
+            <span id="link-signup" onClick={() => setCurrState('Sign-Up')}>
+              Click here
+            </span>
           </p>
         ) : (
           <p>
             Already have an account?{' '}
-            <span onClick={() => setCurrState('Login')}>Login here</span>
+            <span id="link-login" onClick={() => setCurrState('Login')}>
+              Login here
+            </span>
           </p>
         )}
       </form>
